@@ -5,9 +5,9 @@ import css from './ContactForm.module.css';
 import { useId } from 'react';
 
 const initialValues = {
+  id: '',
   name: '',
   number: '',
-  id: '',
 };
 
 const ContactFormSchema = Yup.object().shape({
