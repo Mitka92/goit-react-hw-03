@@ -13,15 +13,17 @@ const Contact = ({ id, name, number, onDelete }) => {
           >
             <IoIosContact />
           </IconContext.Provider>
-          {name}
+          <b>{name}</b>
         </span>
         <span className={css.number}>
-          <IconContext.Provider
-            value={{ color: 'blue', className: [css.icon] }}
-          >
-            <FaPhone />
-          </IconContext.Provider>
-          {number}
+          <a href={`tel:${number}`}>
+            <IconContext.Provider
+              value={{ color: 'blue', className: [css.icon] }}
+            >
+              <FaPhone />
+            </IconContext.Provider>
+            {number}
+          </a>
         </span>
       </span>
       <button type="button" className={css.btn} onClick={() => onDelete(id)}>

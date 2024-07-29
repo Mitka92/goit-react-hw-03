@@ -32,3 +32,6 @@
 .icon {
   margin-right: 8px;
 }
+.number:hover {
+  color: #007bffc1;
+}

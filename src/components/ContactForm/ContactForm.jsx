@@ -17,7 +17,10 @@ const ContactFormSchema = Yup.object().shape({
     .required('Required'),
   number: Yup.string()
     .trim()
-    .matches(/^\d+$/, 'Invalid format, only numbers are allowed')
+    .matches(
+      /^[0-9+\-()]+$/,
+      'Invalid format, only numbers and +, -, () are allowed'
+    )
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
