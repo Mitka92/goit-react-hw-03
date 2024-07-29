@@ -35,3 +35,8 @@
 .number:hover {
   color: #007bffc1;
 }
+@media (max-width: 768px) {
+  .contact {
+    width: 100%;
+  }
+}
