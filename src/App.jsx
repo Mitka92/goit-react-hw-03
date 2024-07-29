@@ -12,7 +12,7 @@ function App() {
     if (savedContacts !== null) {
       return JSON.parse(savedContacts);
     }
-    return data;
+    return [];
   });
 
   const [filter, setFilter] = useState('');
@@ -39,7 +39,9 @@ function App() {
   return (
     <Section>
       <div className="phone-book">
-        <h1>Phonebook</h1>
+        <h1 className="title">
+          <span className="span">P</span>honebook
+        </h1>
         <ContactForm onAdd={addContact} />
         <SearchBox value={filter} onFilter={setFilter} />
         <ContactList contacts={visibleContacts} onDelete={deleteContact} />

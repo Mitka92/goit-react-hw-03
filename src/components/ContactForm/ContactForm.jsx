@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
-import { useId } from 'react';
 
 const initialValues = {
   id: '',
@@ -12,18 +11,19 @@ const initialValues = {
 
 const ContactFormSchema = Yup.object().shape({
   name: Yup.string()
+    .trim()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
   number: Yup.string()
+    .trim()
+    .matches(/^\d+$/, 'Invalid format, only numbers are allowed')
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
 });
-const ContactForm = ({ onAdd }) => {
-  const nameFieldId = useId();
-  const numberFieldId = useId();
 
+const ContactForm = ({ onAdd }) => {
   const handleSubmit = (values, actions) => {
     const newContact = {
       ...values,
@@ -33,31 +33,40 @@ const ContactForm = ({ onAdd }) => {
     actions.resetForm();
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={ContactFormSchema}
-    >
-      <Form className={css.form}>
-        <label htmlFor={nameFieldId}>Name</label>
-        <Field
-          type="text"
-          name="name"
-          id={nameFieldId}
-          placeholder="Enter contact Name"
-        />
-        <ErrorMessage name="name" component="span" />
-        <label htmlFor={numberFieldId}>Number</label>
-        <Field
-          type="text"
-          name="number"
-          id={numberFieldId}
-          placeholder="Enter phone number"
-        />
-        <ErrorMessage name="number" component="span" />
-        <button type="submit">Add contact</button>
-      </Form>
-    </Formik>
+    <>
+      <h2 className={css.title}>Add contact</h2>
+      <div className={css.wrapper}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={ContactFormSchema}
+        >
+          <Form className={css.form}>
+            <Field
+              className={css.input}
+              type="text"
+              name="name"
+              placeholder="Enter contact Name"
+            />
+            <ErrorMessage className={css.error} name="name" component="span" />
+            <Field
+              className={css.input}
+              type="text"
+              name="number"
+              placeholder="Enter phone number"
+            />
+            <ErrorMessage
+              className={css.error}
+              name="number"
+              component="span"
+            />
+            <button className={css.btn} type="submit">
+              Add contact
+            </button>
+          </Form>
+        </Formik>
+      </div>
+    </>
   );
 };
 
