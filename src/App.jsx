@@ -3,7 +3,6 @@ import Section from './components/Section/Section';
 import ContactForm from './components/ContactForm/ContactForm';
 import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
-import data from './db.json';
 import { useEffect, useState } from 'react';
 
 function App() {
